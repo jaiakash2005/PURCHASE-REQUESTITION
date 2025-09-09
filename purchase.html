@@ -1,0 +1,144 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Purchase Request Form</title>  
+    <style>  
+        body {  
+            font-family: 'Arial', sans-serif;  
+            background-color: #e0f7fa; /* Light cyan background for a refreshing look */  
+            margin: 0;  
+            padding: 50px;  
+        }  
+        .container {  
+            max-width: 600px;  
+            margin: auto;  
+            background: white;  
+            padding: 20px;  
+            border-radius: 10px;  
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);  
+        }  
+        h1 {  
+            text-align: center;  
+            color: #00796b; /* Teal color for headings */  
+            margin-bottom: 20px;  
+        }  
+        label {  
+            display: block;  
+            margin-bottom: 5px;  
+            font-weight: bold;  
+            color: #00575b; /* Slightly darker teal for labels */  
+        }  
+        input[type="text"],  
+        input[type="number"],  
+        input[type="email"],  
+        select,  
+        textarea {  
+            width: 100%;  
+            padding: 10px;  
+            margin: 10px 0 20px;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+            box-sizing: border-box;  
+            transition: border-color 0.3s;  
+        }  
+        input[type="text"]:focus,  
+        input[type="number"]:focus,  
+        input[type="email"]:focus,  
+        select:focus,  
+        textarea:focus {  
+            border-color: #00796b;  
+            outline: none;  
+        }  
+        button {  
+            width: 100%;  
+            background-color: #00796b;  
+            color: white;  
+            padding: 10px 15px;  
+            border: none;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            font-size: 16px;  
+            transition: background-color 0.3s, transform 0.3s;  
+        }  
+        button:hover {  
+            background-color: #004d40;  
+            transform: scale(1.05); /* Slight zoom effect on hover */  
+        }  
+        .submit-buttons {  
+            display: flex;  
+            justify-content: space-between;  
+            margin-top: 20px;  
+        }  
+        .submit-buttons button:last-child {  
+            margin-right: 0;  
+        }  
+        ul {  
+            color: red;  
+            margin: 10px 0;  
+            padding: 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <h1>Purchase Request Form</h1>  
+        <form action="{{ url_for('purchase') }}" method="POST">  
+            <label for="requestId">Request ID:</label>  
+            <input type="text" id="requestId" name="requestId" required>  
+
+            <label for="requesterName">Requester Name:</label>  
+            <input type="text" id="requesterName" name="requesterName" required>  
+
+            <label for="email">Email ID:</label>  
+            <input type="email" id="email" name="email" required>  
+
+            <label for="department">Department:</label>  
+            <select name="department" id="department" required>  
+                <option value="Education">Education</option>  
+                <option value="Town Administration">Town Administration</option>  
+                <option value="Hospital">Hospital</option>  
+                <option value="Material Management">Material Management</option>  
+            </select>  
+            
+            <label for="item">Item Name:</label>  
+            <input type="text" id="item" name="item" required>  
+
+            <label for="quantity">Quantity:</label>  
+            <input type="number" id="quantity" name="quantity" required>  
+
+            <label for="materialType">Material Type:</label>  
+            <select name="materialType" id="materialType" required>  
+                <option value="Hardware">Hardware</option>  
+                <option value="Software">Software</option>  
+                <option value="Consumables">Consumables</option>  
+                <option value="Machines">Machines</option>  
+                <option value="Tools">Tools</option>  
+                <option value="Raw Material">Raw Material</option>  
+                <option value="Office Supplies">Office Supplies</option>  
+                <option value="Spare Parts">Spare Parts</option>  
+            </select>  
+
+            <label for="date">Date of Request:</label>  
+            <input type="date" id="date" name="date" required>  
+
+            <label for="price">Price:</label>  
+            <input type="number"  id="price" name="price" required> 
+
+            <div class="submit-buttons">  
+                <button type="submit">Submit</button>  
+            </div>  
+        </form>  
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                <ul>  
+                {% for message in messages %}  
+                    <li>{{ message }}</li>  
+                {% endfor %}  
+                </ul>  
+            {% endif %}  
+        {% endwith %}  
+    </div>  
+</body>  
+</html>

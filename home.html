@@ -1,0 +1,133 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Neyveli Lignite Corporation India Limited</title>  
+    <style>  
+        body {  
+            font-family: 'Arial', sans-serif;  
+            background-color: #e0f7fa; /* Light cyan background */  
+            margin: 0;  
+            padding: 0;  
+            height: 100vh; /* Full height for body */  
+            display: flex; /* Use flexbox for layout */  
+            flex-direction: column; /* Stack content vertically */  
+        }  
+        .container {  
+            flex: 1; /* Allow container to grow to fill available space */  
+            max-width: 1200px; /* Set max width for the content */  
+            margin: 0 auto; /* Center container horizontally */  
+            background: white;  
+            padding: 20px;  
+            border-radius: 10px;  
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);  
+            overflow-y: auto; /* Enable scrolling if needed */  
+        }  
+        h1 {  
+            color: #00796b; /* Teal color */  
+            text-align: center;  
+            margin-bottom: 20px;  
+        }  
+        nav {  
+            margin-bottom: 20px;  
+            text-align: center;  
+        }  
+        nav a {  
+            margin: 0 15px;  
+            text-decoration: none;  
+            color: #00796b;  
+            font-weight: bold;  
+            padding: 10px;  
+            border-radius: 5px;  
+            transition: background-color 0.3s;  
+        }  
+        nav a:hover {  
+            background-color: #b2dfdb; /* Light teal background on hover */  
+        }  
+        .button {  
+            display: inline-block;  
+            margin: 20px 0;  
+            padding: 10px 20px;  
+            color: white;  
+            background-color: #00796b;  
+            text-decoration: none;  
+            border-radius: 5px;  
+            transition: background-color 0.3s;  
+            text-align: center;  
+        }  
+        .button:hover {  
+            background-color: #004d40; /* Darker teal on hover */  
+        }  
+        .logout-button {  
+            background-color: #e53935; /* Red for logout button */  
+        }  
+        .logout-button:hover {  
+            background-color: #c62828; /* Darker red on hover */  
+        }  
+        .section {  
+            margin: 20px 0;  
+            padding: 20px;  
+            background: #f1f8e9; /* Light green background for sections */  
+            border-radius: 5px;  
+        }  
+        .section h2 {  
+            color: #00796b;  
+            margin-top: 0;  
+        }  
+        ul {  
+            list-style-type: square; /* List style for services */  
+            padding-left: 20px;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <h1>Neyveli Lignite Corporation India Limited</h1>  
+
+        <nav>  
+            <a href="#about">About</a>  
+            <a href="#purchase">Purchase</a>  
+            <a href="#services">Our Services</a>  
+            <a href="#contact">Contact Us</a>  
+        </nav>  
+
+        <!-- About Section -->  
+        <div id="about" class="section">  
+            <h2>About Us</h2>  
+            <p>Neyveli Lignite Corporation India Limited (NLCIL) is a prominent player in the energy sector of India, founded in 1956. It operates lignite mines and a series of power plants, harnessing the resources of lignite for sustainable energy generation. The corporation is headquartered in Neyveli, Tamil Nadu, and plays a significant role in contributing to India's energy security with eco-friendly initiatives.</p>  
+            <p>With a mission to promote sustainable development, NLCIL is focused on power generation and actively engages in solar power projects and various initiatives contributing to environmental sustainability.</p>  
+        </div>  
+
+        <!-- Purchase Section -->  
+        <div id="purchase" class="section">  
+            <h2>Purchase Request</h2>  
+            <p>To create a purchase request, click the button below.</p>  
+            <a href="{{ url_for('purchase') }}" class="button">Create Purchase Request</a>  
+        </div>  
+
+        <!-- Our Services Section -->  
+        <div id="services" class="section">  
+            <h2>Our Services</h2>  
+            <p>NLCIL offers a diverse range of services that include:</p>  
+            <ul>  
+                <li><strong>Lignite Mining:</strong> Operating and maintaining lignite mines ensuring efficient and sustainable extraction.</li>  
+                <li><strong>Power Generation:</strong> Producing energy through thermal and renewable energy sources such as solar power.</li>  
+                <li><strong>Environmental Management:</strong> Commitment to sustainable practices, including afforestation and community development.</li>  
+                <li><strong>Educational Services:</strong> Supporting educational programs and skill development initiatives for local communities.</li>  
+            </ul>  
+        </div>  
+
+        <!-- Contact Us Section -->  
+        <div id="contact" class="section">  
+            <h2>Contact Us</h2>  
+            <p>If you need further information or assistance, please reach out to us:</p>  
+            <p><strong>Email:</strong> <a href="mailto:info@nlcindia.com">info@nlcindia.com</a></p>  
+            <p><strong>Phone:</strong> +91 123 456 7890</p>  
+            <p><strong>Address:</strong> Neyveli Lignite Corporation India Limited, Neyveli - 607801, Tamil Nadu, India</p>  
+        </div>  
+
+        <a href="{{ url_for('logout') }}" class="button logout-button">Logout</a>  
+    </div>  
+</body>  
+</html>

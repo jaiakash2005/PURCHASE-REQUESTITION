@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Approved</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header styles */
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 36px;
+            color: #4CAF50;
+        }
+
+        /* Order details container styles */
+        .order-details {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Labels for inputs */
+        .order-details p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* Style for the labels inside order-details */
+        .order-details .label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Confirmation message styles */
+        .confirmation-message {
+            margin-top: 20px;
+            text-align: center;
+            color: #4CAF50;
+            font-size: 20px;
+            display: none; /* Hidden initially */
+        }
+
+        /* Input fields styles */
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Select box styles */
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Back to home link styling */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .order-details {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* Hidden by default */
+        .payment-details {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Approved</h1>
+    <div class="order-details">
+        <!-- Vendor Address (Manual Input) -->
+        <p><span class="label">Vendor Address:</span></p>
+        <textarea class="input-field" rows="4" placeholder="Enter Vendor Address"></textarea>
+        
+        <!-- Customer Address (Fixed Text) -->
+        <p><span class="label">Customer Address:</span> NLC India Limited
+
+Neyveli Township,
+Block 1, Administrative Building,
+Neyveli - 607 801,
+Cuddalore District,
+Tamil Nadu, India.</p>
+        
+        <!-- Payment Method (Dropdown) -->
+        <p><span class="label">Payment Method:</span></p>
+        <select class="input-field" id="paymentMethod" onchange="showPaymentFields()">
+            <option value="">Select Payment Method</option>
+            <option value="credit_card">Credit Card</option>
+            <option value="debit_card">Debit Card</option>
+            <option value="upi">UPI</option>
+            <option value="net_banking">Net Banking</option>
+        </select>
+
+        <!-- Payment Details (hidden by default, displayed based on payment method) -->
+        <div id="credit_card_details" class="payment-details">
+            <p><span class="label">Credit Card Number:</span></p>
+            <input type="text" class="input-field" placeholder="Enter Credit Card Number">
+            <p><span class="label">Expiry Date:</span></p>
+            <input type="text" class="input-field" placeholder="MM/YY">
+            <p><span class="label">CVV:</span></p>
+            <input type="text" class="input-field" placeholder="Enter CVV">
+        </div>
+
+        <div id="debit_card_details" class="payment-details">
+            <p><span class="label">Debit Card Number:</span></p>
+            <input type="text" class="input-field" placeholder="Enter Debit Card Number">
+            <p><span class="label">Expiry Date:</span></p>
+            <input type="text" class="input-field" placeholder="MM/YY">
+            <p><span class="label">CVV:</span></p>
+            <input type="text" class="input-field" placeholder="Enter CVV">
+        </div>
+
+        <div id="upi_details" class="payment-details">
+            <p><span class="label">UPI ID:</span></p>
+            <input type="text" class="input-field" placeholder="Enter UPI ID">
+        </div>
+
+        <div id="net_banking_details" class="payment-details">
+            <p><span class="label">Bank Name:</span></p>
+            <input type="text" class="input-field" placeholder="Enter Bank Name">
+            <p><span class="label">Account Number:</span></p>
+            <input type="text" class="input-field" placeholder="Enter Account Number">
+            <p><span class="label">IFSC Code:</span></p>
+            <input type="text" class="input-field" placeholder="Enter IFSC Code">
+        </div>
+
+        <!-- Confirm Order Button -->
+        <button onclick="confirmOrder()" class="input-field" style="background-color: #4CAF50; color: white; border: none; cursor: pointer;">Confirm Order</button>
+    </div>
+    
+    <div class="confirmation-message" id="orderConfirmation">
+        <p>Your order has been successfully placed!</p>
+    </div>
+    
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+
+    <script>
+        function showPaymentFields() {
+            // Hide all payment detail sections
+            document.getElementById("credit_card_details").style.display = "none";
+            document.getElementById("debit_card_details").style.display = "none";
+            document.getElementById("upi_details").style.display = "none";
+            document.getElementById("net_banking_details").style.display = "none";
+
+            // Get selected payment method
+            var paymentMethod = document.getElementById("paymentMethod").value;
+
+            // Show corresponding payment detail section
+            if (paymentMethod === "credit_card") {
+                document.getElementById("credit_card_details").style.display = "block";
+            } else if (paymentMethod === "debit_card") {
+                document.getElementById("debit_card_details").style.display = "block";
+            } else if (paymentMethod === "upi") {
+                document.getElementById("upi_details").style.display = "block";
+            } else if (paymentMethod === "net_banking") {
+                document.getElementById("net_banking_details").style.display = "block";
+            }
+        }
+
+        function confirmOrder() {
+            // Show the confirmation message
+            document.getElementById("orderConfirmation").style.display = "block";
+        }
+    </script>
+</body>
+</html>
